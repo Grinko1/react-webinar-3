@@ -26,3 +26,11 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+export const declension = (count) => {
+  let firstSymbol = count + '';
+  if (firstSymbol[firstSymbol.length - 2] != 1 && count % 10 >= 2 && count % 10 <= 4) {
+    return `| Выделяли ${count} раза `;
+  }
+  return `| Выделяли ${count} раз `;
+};
