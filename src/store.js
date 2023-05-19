@@ -1,4 +1,4 @@
-import {generateCode} from "./utils";
+import { generateCode } from './utils';
 
 /**
  * Хранилище состояния приложения
@@ -18,8 +18,8 @@ class Store {
     this.listeners.push(listener);
     // Возвращается функция для удаления добавленного слушателя
     return () => {
-      this.listeners = this.listeners.filter(item => item !== listener);
-    }
+      this.listeners = this.listeners.filter((item) => item !== listener);
+    };
   }
 
   /**
@@ -41,14 +41,79 @@ class Store {
   }
 
   /**
+   * Добавление нового товара в корзину
+   * * @param product
+   */
+  addItemToCart(product) {
+    const existingIndex = this.state.cartList.findIndex((item) => item.code === product.code);
+    if (existingIndex >= 0) {
+      this.setState({
+        ...this.state,
+        cartList: this.state.cartList.map((item) => {
+          if (item.code === product.code) {
+            return {
+              ...item,
+              cartQuantity: item.cartQuantity + 1,
+            };
+          }
+          return item;
+        }),
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        cartList: [...this.state.cartList, { ...product, cartQuantity: 1 }],
+      });
+    }
+  }
+
+  /**
+   * Удаление из корзины
+   * @param code
+   */
+  deleteItemFromCart(code) {
+    this.setState({
+      ...this.state,
+      cartList: this.state.cartList.filter((item) => item.code !== code),
+    });
+  }
+
+  /**
+   * Получение общего кол-ва и цены в корзине
+   */
+  getTotals() {
+    let { total, quantity } = this.state.cartList.reduce(
+      (cartTotal, cartItem) => {
+        const { price, cartQuantity } = cartItem;
+        const itemTotal = price * cartQuantity;
+
+        cartTotal.total += itemTotal;
+        cartTotal.quantity += cartQuantity;
+        return cartTotal;
+      },
+      {
+        total: 0,
+        quantity: 0,
+      },
+    );
+    this.setState({
+      ...this.state,
+      cartTotalQuantity: quantity,
+      cartTotalPrice: total,
+    });
+  }
+
+  ///unused methods
+
+  /**
    * Добавление новой записи
    */
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
-    })
-  };
+      list: [...this.state.list, { code: generateCode(), title: 'Новая запись' }],
+    });
+  }
 
   /**
    * Удаление записи по коду
@@ -58,9 +123,9 @@ class Store {
     this.setState({
       ...this.state,
       // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code)
-    })
-  };
+      list: this.state.list.filter((item) => item.code !== code),
+    });
+  }
 
   /**
    * Выделение записи по коду
@@ -69,7 +134,7 @@ class Store {
   selectItem(code) {
     this.setState({
       ...this.state,
-      list: this.state.list.map(item => {
+      list: this.state.list.map((item) => {
         if (item.code === code) {
           // Смена выделения и подсчёт
           return {
@@ -79,9 +144,9 @@ class Store {
           };
         }
         // Сброс выделения если выделена
-        return item.selected ? {...item, selected: false} : item;
-      })
-    })
+        return item.selected ? { ...item, selected: false } : item;
+      }),
+    });
   }
 }
 
