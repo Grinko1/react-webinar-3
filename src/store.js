@@ -79,26 +79,23 @@ class Store {
   }
 
   /**
-   * Получение общего кол-ва и цены в корзине
+   * Получение общей цены в корзине
    */
   getTotals() {
-    let { total, quantity } = this.state.cartList.reduce(
+    let { total } = this.state.cartList.reduce(
       (cartTotal, cartItem) => {
         const { price, cartQuantity } = cartItem;
         const itemTotal = price * cartQuantity;
 
         cartTotal.total += itemTotal;
-        cartTotal.quantity += cartQuantity;
         return cartTotal;
       },
       {
         total: 0,
-        quantity: 0,
       },
     );
     this.setState({
       ...this.state,
-      cartTotalQuantity: quantity,
       cartTotalPrice: total,
     });
   }

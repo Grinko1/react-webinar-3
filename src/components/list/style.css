@@ -4,3 +4,23 @@
 .List-item:first-child {
   border-top: 1px dashed #ccc;
 }
+.List-item_cart:first-child {
+  margin-top: 63px;
+}
+.List-cart_total {
+  padding: 20px 0;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: end;
+  margin-right: 117px;
+}
+
+.List-cart_total span {
+  margin-left: 50px;
+
+}
+
+.List-cart_empty {
+  text-align: center;
+  margin-top: 100px;
+}

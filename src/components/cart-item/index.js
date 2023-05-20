@@ -5,36 +5,39 @@ import Button from '../button';
 import { cn as bem } from '@bem-react/classname';
 import { formatCurrency } from '../../utils';
 
-function Item(props) {
+function CartItem(props) {
   const callbacks = {
-    onAdd: () => {
-      props.onAddToCart(props.item);
+    onDelete: () => {
+      props.onDelete(props.item.code);
     },
   };
+
   const cn = bem('Item');
   return (
     <div className={cn()}>
       <div className={cn('code')}>{props.item.code}</div>
       <div className={cn('title')}>{props.item.title}</div>
       <div className={cn('price')}>{formatCurrency(props.item.price)} </div>
+      <div className={cn('amount')}>{props.item.cartQuantity} шт</div>
       <div className={cn('actions')}>
-        <Button onClick={callbacks.onAdd}>Добавить</Button>
+        <Button onClick={callbacks.onDelete}>Удалить</Button>
       </div>
     </div>
   );
 }
 
-Item.propTypes = {
+CartItem.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
     price: PropTypes.number,
+    cartQuantity: PropTypes.number,
   }).isRequired,
-  onAdd: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
-Item.defaultProps = {
-  onAdd: () => {},
+CartItem.defaultProps = {
+  onDelete: () => {},
 };
 
-export default React.memo(Item);
+export default React.memo(CartItem);

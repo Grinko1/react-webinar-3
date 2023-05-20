@@ -1,49 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
-import Modal from '../modal';
-import {plural} from '../../utils'
-import Cart from '../cart';
+import { formatCurrency, plural } from '../../utils';
+import Button from '../button';
+import { cn as bem } from '@bem-react/classname';
 
-function Controls({ list, onDeleteItem, cartTotalQuantity, cartTotalPrice }) {
-  const [isOpenModal, setIsModalOpen] = useState(false);
+function Controls({ quantityUniqProduct, cartTotalPrice, setIsModalOpen }) {
+  const cn = bem('Controls');
+
+  // функция склонения, вынесла для лучшей читаемости
+  const getDeclination = (count) => {
+    return plural(count, {
+      one: 'товар',
+      few: 'товара',
+      many: 'товаров',
+    });
+  };
 
   return (
-    <div className='Controls'>
-      <div className='Controls-card'>
+    <div className={cn()}>
+      <div className={cn('cart')}>
         В корзине:
-        <b className={cartTotalQuantity ? 'Controls-card__info' : 'Controls-card__info Empty_cart'}>
-          {cartTotalQuantity
-            ? `${cartTotalQuantity} ${plural(cartTotalQuantity, {
-                one: 'товар',
-                few: 'товара',
-                many: 'товаров',
-              })}  / ${cartTotalPrice}`
+        <b className={cn('cart', { info: true })}>
+          {quantityUniqProduct
+            ? `${quantityUniqProduct} ${getDeclination(quantityUniqProduct)} / ${formatCurrency(cartTotalPrice)}`
             : 'пусто'}
         </b>
       </div>
-      <button onClick={() => setIsModalOpen(true)}>Перейти</button>
-      <Modal modalHeader='Корзина' isActive={isOpenModal} setIsActive={setIsModalOpen}>
-        <Cart
-          list={list}
-          isCart={true}
-          onDeleteItem={onDeleteItem}
-          cartTotalPrice={cartTotalPrice}
-        />
-      </Modal>
+      <Button onClick={() => setIsModalOpen(true)}>Перейти</Button>
     </div>
   );
 }
 
 Controls.propTypes = {
-  list: PropTypes.array.isRequired,
-  onDeleteItem: PropTypes.func,
-  cartTotalQuantity: PropTypes.number,
+  quantityUniqProduct: PropTypes.number.isRequired,
   cartTotalPrice: PropTypes.number,
+  setIsModalOpen: PropTypes.func,
 };
 
 Controls.defaultProps = {
-  onDeleteItem: () => {},
+  setIsModalOpen: () => {},
 };
 
 export default React.memo(Controls);

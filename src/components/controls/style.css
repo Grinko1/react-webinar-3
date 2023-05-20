@@ -3,17 +3,8 @@
   justify-content: flex-end;
   padding: 20px;
 }
-.Controls-card__info {
-  margin: 0 20px;
+.Controls-cart_info {
+  margin: 0 33px 0 15px;
   font-size: 18px;
   font-weight: 700;
-}
-.Controls-card__info::after {
-  content: ' \00a0 \20BD';
-}
-.Empty_cart::after {
-  content: '';
-}
-.Controls button {
-  cursor: pointer;
 }

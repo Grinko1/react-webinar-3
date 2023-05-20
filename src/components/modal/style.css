@@ -16,10 +16,11 @@
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  height: 407px;
+  min-height: 407px;
   width: 960px;
   overflow: hidden;
   box-sizing:border-box;
+  padding-bottom: 90px;
 }
 .Modal-content__header {
   height: 80px;
