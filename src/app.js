@@ -5,16 +5,13 @@ import Head from './components/head';
 import PageLayout from './components/page-layout';
 import Modal from './components/modal';
 
-
 /**
  * Приложение
  * @param store {Store} Хранилище состояния приложения
  * @returns {React.ReactElement}
  */
 function App({ store }) {
-  const list = store.getState().list;
-  const cartList = store.getState().cartList;
-  const cartTotalPrice = store.getState().cartTotalPrice;
+  const { list, cartList, cartTotalPrice } = store.getState();
 
   const [isOpenModal, setIsModalOpen] = useState(false);
 
@@ -52,16 +49,15 @@ function App({ store }) {
         cartTotalPrice={cartTotalPrice}
         setIsModalOpen={setIsModalOpen}
       />
-      <List list={list} onAddToCart={callbacks.onAddToCart} />
+      <List list={list} handleAction={callbacks.onAddToCart} />
       <Modal title='Корзина' isActive={isOpenModal} setIsActive={setIsModalOpen}>
         <List
           list={cartList}
           isCart={true}
-          onDeleteItem={callbacks.onDeleteItem}
           cartTotalPrice={cartTotalPrice}
+          handleAction={callbacks.onDeleteItem}
         />
       </Modal>
-   
     </PageLayout>
   );
 }

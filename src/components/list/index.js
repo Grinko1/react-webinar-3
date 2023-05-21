@@ -6,7 +6,7 @@ import { cn as bem } from '@bem-react/classname';
 import './style.css';
 import { formatCurrency } from '../../utils';
 
-function List({ list, onAddToCart, isCart = false, onDeleteItem, cartTotalPrice }) {
+function List({ isCart = false, list, ...props }) {
   const cn = bem('List');
 
   return (
@@ -15,16 +15,16 @@ function List({ list, onAddToCart, isCart = false, onDeleteItem, cartTotalPrice 
         {list.map((item) => (
           <div key={item.code} className={isCart ? cn('item', { cart: true }) : cn('item')}>
             {isCart ? (
-              <CartItem item={item} onDelete={onDeleteItem} />
+              <CartItem item={item} handleAction={props.handleAction} />
             ) : (
-              <Item item={item} onAddToCart={onAddToCart} />
+              <Item item={item} handleAction={props.handleAction} />
             )}
           </div>
         ))}
 
         {!!list.length && isCart && (
           <div className={cn('cart', { total: true })}>
-            Итого <span>{formatCurrency(cartTotalPrice)}</span>
+            Итого <span>{formatCurrency(props.cartTotalPrice)}</span>
           </div>
         )}
       </>

@@ -8,7 +8,7 @@ import { formatCurrency } from '../../utils';
 function CartItem(props) {
   const callbacks = {
     onDelete: () => {
-      props.onDelete(props.item.code);
+      props.handleAction(props.item.code);
     },
   };
 

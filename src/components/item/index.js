@@ -8,7 +8,7 @@ import { formatCurrency } from '../../utils';
 function Item(props) {
   const callbacks = {
     onAdd: () => {
-      props.onAddToCart(props.item);
+      props.handleAction(props.item);
     },
   };
   const cn = bem('Item');
