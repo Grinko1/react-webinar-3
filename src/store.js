@@ -45,7 +45,6 @@ class Store {
    * * @param code
    */
   addItemToCart(code) {
-    console.log(this.state.cartLength);
     const existingIndex = this.state.cartList.findIndex((item) => item.code === code);
     if (existingIndex >= 0) {
       this.setState({
