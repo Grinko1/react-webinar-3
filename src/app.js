@@ -11,7 +11,7 @@ import Modal from './components/modal';
  * @returns {React.ReactElement}
  */
 function App({ store }) {
-  const { list, cartList, cartTotalPrice } = store.getState();
+  const { list, cartList, cartTotalPrice, cartLength } = store.getState();
 
   const [isOpenModal, setIsModalOpen] = useState(false);
 
@@ -23,29 +23,30 @@ function App({ store }) {
       [store],
     ),
     onAddToCart: useCallback(
-      (product) => {
-        store.addItemToCart(product);
+      (code) => {
+        store.addItemToCart(code);
       },
       [store],
     ),
     onGetTotals: useCallback(() => {
       store.getTotals();
     }, [store]),
+    getCartLength: useCallback(() => {
+      store.getCartLength();
+    }, [store]),
   };
 
   // Следит за обновлением корзины
   useEffect(() => {
     callbacks.onGetTotals();
+    callbacks.getCartLength();
   }, [cartList]);
-
-  // К-во уникальных товаров в корзине
-  const quantityUniqProduct = cartList.length;
 
   return (
     <PageLayout>
       <Head title='Магазин' />
       <Controls
-        quantityUniqProduct={quantityUniqProduct}
+        quantityUniqProduct={cartLength}
         cartTotalPrice={cartTotalPrice}
         setIsModalOpen={setIsModalOpen}
       />

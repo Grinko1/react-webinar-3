@@ -42,15 +42,16 @@ class Store {
 
   /**
    * Добавление нового товара в корзину
-   * * @param product
+   * * @param code
    */
-  addItemToCart(product) {
-    const existingIndex = this.state.cartList.findIndex((item) => item.code === product.code);
+  addItemToCart(code) {
+    console.log(this.state.cartLength);
+    const existingIndex = this.state.cartList.findIndex((item) => item.code === code);
     if (existingIndex >= 0) {
       this.setState({
         ...this.state,
         cartList: this.state.cartList.map((item) => {
-          if (item.code === product.code) {
+          if (item.code === code) {
             return {
               ...item,
               cartQuantity: item.cartQuantity + 1,
@@ -60,9 +61,10 @@ class Store {
         }),
       });
     } else {
+      const targetProduct = { ...this.state.list.find((item) => item.code === code) };
       this.setState({
         ...this.state,
-        cartList: [...this.state.cartList, { ...product, cartQuantity: 1 }],
+        cartList: [...this.state.cartList, { ...targetProduct, cartQuantity: 1 }],
       });
     }
   }
@@ -97,6 +99,15 @@ class Store {
     this.setState({
       ...this.state,
       cartTotalPrice: total,
+    });
+  }
+  /**
+   * Получение к-ва уникальных товаров
+   */
+  getCartLength() {
+    this.setState({
+      ...this.state,
+      cartLength: this.state.cartList.length,
     });
   }
 

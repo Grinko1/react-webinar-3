@@ -9,6 +9,7 @@ import { formatCurrency } from '../../utils';
 function List({ isCart = false, list, ...props }) {
   const cn = bem('List');
 
+
   return (
     <div className={cn()}>
       <>

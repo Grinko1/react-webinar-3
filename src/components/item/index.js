@@ -8,7 +8,7 @@ import { formatCurrency } from '../../utils';
 function Item(props) {
   const callbacks = {
     onAdd: () => {
-      props.handleAction(props.item);
+      props.handleAction(props.item.code);
     },
   };
   const cn = bem('Item');

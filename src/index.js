@@ -16,6 +16,7 @@ const store = new Store({
   ],
   cartList: [],
   cartTotalPrice: 0,
+  cartLength:0
 });
 
 const root = createRoot(document.getElementById('root'));
