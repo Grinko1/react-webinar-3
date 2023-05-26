@@ -42,6 +42,7 @@ body:has(.ModalLayout){
 
 .ModalLayout-close{
   align-self: center;
+  min-width: 74px;
 }
 
 .ModalLayout-title{

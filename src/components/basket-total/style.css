@@ -13,4 +13,8 @@
   padding-left: 10px;
   white-space: nowrap;
 }
-
+.BasketTotal-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

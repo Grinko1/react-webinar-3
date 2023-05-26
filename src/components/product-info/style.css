@@ -1,0 +1,7 @@
+.Product{
+    padding: 10px 40px;
+    font-size: 18px;
+}
+.Product button{
+    min-width: 72px;
+}

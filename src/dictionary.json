@@ -1,0 +1,40 @@
+{
+  "en": {
+    "name": "Shop",
+    "main": "Main",
+    "inCart": "in Cart",
+    "empty": "empty",
+    "btnToCart": "go to cart",
+    "btnAdd": "add ",
+    "btnClose": "close",
+    "btnDelete": "Delete",
+    "countryOfOrigin": "Country of origin",
+    "category": "Category",
+    "year": "Production year",
+    "price": "Price",
+    "piece": "pc",
+    "totalAmount": "total amount",
+    "product": "product",
+    "cart": "Cart",
+    "emptyCart":"You haven't added anything yet"
+  },
+  "ru": {
+    "name": "Магазин",
+    "main": "Главная",
+    "inCart": "В корзине",
+    "empty": "пусто",
+    "btnToCart": "перейти",
+    "btnAdd": "Добавить",
+    "btnClose": "Закрыть",
+    "btnDelete": "Удалить",
+    "countryOfOrigin": "Страна производитель",
+    "category": "Категория",
+    "year":"Год выпуска",
+    "price": "Цена",
+    "piece": "шт",
+    "totalAmount": "Итого",
+    "product": "товар",
+    "cart": "Корзина",
+    "emptyCart": "Вы ещё ничего не добавили"
+  }
+}
