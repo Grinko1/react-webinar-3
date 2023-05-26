@@ -8,6 +8,7 @@ import BasketTool from '../../components/basket-tool';
 import ProductInfo from '../../components/product-info';
 import { useTranslate } from '../../hooks/useTranslate';
 
+
 function Product() {
   const store = useStore();
   const { id } = useParams();
@@ -24,7 +25,7 @@ function Product() {
   const callbacks = {
     addToBasket: useCallback((id) => store.actions.basket.addToBasket(id), [store]),
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
-    toggleLanguage: useCallback((ln) => store.actions.language.changeLanguage(ln), []),
+    toggleLanguage: useCallback((ln) => store.actions.language.changeLanguage(ln), [store]),
   };
 
   return (

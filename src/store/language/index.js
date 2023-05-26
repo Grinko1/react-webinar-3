@@ -8,7 +8,6 @@ class Language extends StoreModule {
   }
 
   changeLanguage(ln) {
-    console.log(ln);
     this.setState({ currentLanguage: ln }, 'language changed');
   }
 }

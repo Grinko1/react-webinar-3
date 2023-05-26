@@ -32,10 +32,8 @@ function Main() {
     addToBasket: useCallback((_id) => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
-    //переключение страниц
-    changePage: useCallback((page) => setCurrentPage(page), []),
     //изменение языка
-    toggleLanguage: useCallback((ln) => store.actions.language.changeLanguage(ln), []),
+    toggleLanguage: useCallback((ln) => store.actions.language.changeLanguage(ln), [store]),
   };
 
   const renders = {
@@ -62,7 +60,7 @@ function Main() {
       <Pagination
         currentPage={currentPage}
         limit={limit}
-        changePage={callbacks.changePage}
+        changePage={setCurrentPage}
         totalCount={select.totalCount}
       />
     </PageLayout>
