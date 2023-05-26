@@ -9,6 +9,7 @@ const range = (start, end) => {
 };
 
 export const usePagination = ({ totalCount, limit = 10, currentPage }) => {
+  
   const paginationRange = useMemo(() => {
     const totalPageCount = Math.ceil(totalCount / limit);
     if (totalPageCount <= 1) {

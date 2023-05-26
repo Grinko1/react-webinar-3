@@ -2,8 +2,9 @@ import React from 'react';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 import { numberFormat } from '../../utils';
+import PropTypes from 'prop-types';
 
-function ProductInfo({ product, addToBasket, translate}) {
+function ProductInfo({ product, addToBasket, translate }) {
   const cn = bem('Product');
   const callbacks = {
     onAdd: (e) => addToBasket(product._id),
@@ -18,7 +19,7 @@ function ProductInfo({ product, addToBasket, translate}) {
         </b>
       </p>
       <p>
-        {translate.category}:<b> {product?.category?.title}</b>
+        {translate.category}:<b> {product.category?.title}</b>
       </p>
       <p>
         {translate.year}:<b> {product.edition}</b>
@@ -30,5 +31,19 @@ function ProductInfo({ product, addToBasket, translate}) {
     </div>
   );
 }
+ProductInfo.propTypes = {
+  product: PropTypes.shape({
+    description: PropTypes.string,
+    madeIn: PropTypes.shape({ title: PropTypes.string, code: PropTypes.string }),
+    category: PropTypes.shape({ title: PropTypes.string }),
+    edition: PropTypes.number,
+    price: PropTypes.number,
+  }).isRequired,
+  addToBasket: PropTypes.func,
+};
+
+ProductInfo.defaultProps = {
+  addToBasket: () => {},
+};
 
 export default ProductInfo;
