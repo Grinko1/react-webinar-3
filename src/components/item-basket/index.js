@@ -5,9 +5,9 @@ import { cn as bem } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 import './style.css';
 import { Link } from 'react-router-dom';
-import { useTranslate } from '../../hooks/useTranslate';
+import { useTranslate } from '../../hooks/use-translate';
 
-function ItemBasket(props) {
+function ItemBasket({ route = 'product', ...props }) {
   const cn = bem('ItemBasket');
   const callbacks = {
     onRemove: (e) => props.onRemove(props.item._id),
@@ -33,7 +33,7 @@ function ItemBasket(props) {
     <div className={cn()}>
       <div className={cn('title')}>
         <Link
-          to={`product/${props.item._id}`}
+          to={`${route}/${props.item._id}`}
           onClick={props.handleCloseModal}
           className={cn('link')}>
           {props.item.title}

@@ -1,10 +1,8 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
-import useSelector from '../../store/use-selector';
 
-function Head({ title, toggleLanguage }) {
-  const language = useSelector((state) => state.language.currentLanguage);
+function Head({ title, language, toggleLanguage }) {
   const [lang, setLang] = useState(language);
 
   useEffect(() => {
@@ -25,7 +23,11 @@ function Head({ title, toggleLanguage }) {
 }
 
 Head.propTypes = {
-  title: PropTypes.node,
+  title: PropTypes.string,
+  language: PropTypes.string,
+  toggleLanguage: PropTypes.func,
 };
-
+Head.defaultProps = {
+  toggleLanguage: () => {},
+};
 export default memo(Head);

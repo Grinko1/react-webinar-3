@@ -1,10 +1,12 @@
 import React from 'react';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
-import { usePagination, DOTS } from '../../hooks/usePagination';
+import { usePagination, DOTS } from '../../hooks/use-pagination';
 import PropTypes from 'prop-types';
 
-const Pagination = ({ totalCount = 100, currentPage = 1, limit = 10, changePage }) => {
+const Pagination = ({ totalCount, currentPage, limit, changePage }) => {
+
+
   const cn = bem('Pagination');
 
   const paginationRange = usePagination({

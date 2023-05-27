@@ -4,9 +4,9 @@ import { cn as bem } from '@bem-react/classname';
 import { numberFormat } from '../../utils';
 import './style.css';
 import { Link } from 'react-router-dom';
-import { useTranslate } from '../../hooks/useTranslate';
+import { useTranslate } from '../../hooks/use-translate';
 
-function Item(props) {
+function Item({ route = 'product', ...props }) {
   const cn = bem('Item');
 
   const callbacks = {
@@ -16,7 +16,7 @@ function Item(props) {
   return (
     <div className={cn()}>
       <div className={cn('title')}>
-        <Link to={`product/${props.item._id}`} className={cn('link')}>
+        <Link to={`${route}/${props.item._id}`} className={cn('link')}>
           {props.item.title}
         </Link>
       </div>

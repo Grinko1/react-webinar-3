@@ -5,16 +5,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Product from './product';
 
 
+
 /**
  * Приложение
  * @returns {React.ReactElement}
  */
 function App() {
   const activeModal = useSelector((state) => state.modals.name);
-
-
-
-
+  
   return (
     <BrowserRouter>
       <Routes>

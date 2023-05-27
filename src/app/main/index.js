@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import Item from '../../components/item';
 import PageLayout from '../../components/page-layout';
 import Head from '../../components/head';
@@ -7,25 +7,28 @@ import List from '../../components/list';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import Pagination from '../../components/pagination';
-import { useTranslate } from '../../hooks/useTranslate';
+import { useTranslate } from '../../hooks/use-translate';
+
 
 function Main() {
   const store = useStore();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-
-  useEffect(() => {
-    const skip = currentPage < 2 ? 0 : (currentPage - 1) * 10;
-    store.actions.catalog.load(skip);
-  }, [currentPage]);
 
   const select = useSelector((state) => ({
     list: state.catalog.list,
+    // данные для пагинации
+    currentPage: state.catalog.currentPage,
+    limit: state.catalog.limit,
     totalCount: state.catalog.totalCount,
+
     amount: state.basket.amount,
     sum: state.basket.sum,
     lang: state.language.currentLanguage,
   }));
+ 
+  
+  useEffect(() => {
+    store.actions.catalog.load();
+  }, [select.currentPage]);
 
   const callbacks = {
     // Добавление в корзину
@@ -34,12 +37,14 @@ function Main() {
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     //изменение языка
     toggleLanguage: useCallback((ln) => store.actions.language.changeLanguage(ln), [store]),
+    // переключение текущей страницы
+    pageSwitching: useCallback((page) => store.actions.catalog.pageSwitch(page), [store]),
   };
 
   const renders = {
     item: useCallback(
       (item) => {
-        return <Item item={item} onAdd={callbacks.addToBasket} />;
+        return <Item item={item} onAdd={callbacks.addToBasket} route={`product`} />;
       },
       [callbacks.addToBasket],
     ),
@@ -48,7 +53,7 @@ function Main() {
 
   return (
     <PageLayout>
-      <Head title={translate.name} toggleLanguage={callbacks.toggleLanguage} />
+      <Head title={translate.name} toggleLanguage={callbacks.toggleLanguage} language={select.lang} />
       <BasketTool
         onOpen={callbacks.openModalBasket}
         amount={select.amount}
@@ -58,9 +63,9 @@ function Main() {
       />
       <List list={select.list} renderItem={renders.item} />
       <Pagination
-        currentPage={currentPage}
-        limit={limit}
-        changePage={setCurrentPage}
+        currentPage={select.currentPage}
+        limit={select.limit}
+        changePage={callbacks.pageSwitching}
         totalCount={select.totalCount}
       />
     </PageLayout>

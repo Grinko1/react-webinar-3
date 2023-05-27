@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat, plural } from '../../utils';
 import './style.css';
-import { Link } from 'react-router-dom';
+import NavMenu from '../nav-menu';
 
 function BasketTool({ sum, amount, onOpen, translate, lang }) {
   const cn = bem('BasketTool');
@@ -30,9 +30,7 @@ function BasketTool({ sum, amount, onOpen, translate, lang }) {
   return (
     <div className={cn()}>
       <div className={cn('left')}>
-        <Link to='/' className={cn('link')}>
-          {translate?.main}
-        </Link>
+        <NavMenu path='/' title={translate?.main} />
       </div>
       <div className={cn('rigth')}>
         <span className={cn('label')}>{translate?.inCart}:</span>
