@@ -3,24 +3,12 @@
   display: flex;
   padding: 20px;
   font-size: 18px;
-}
-.BasketTool-link{
-  color: #0087E9;
-}
-.BasketTool-left {
-  flex: 1;
-}
-.BasketTool-rigth {
-  flex: 1;
-  display: flex;
   justify-content: flex-end;
 }
-
-.BasketTool-label {
+.BasketTool-link {
+  color: #0087e9;
 }
-
 .BasketTool-total {
   font-weight: bold;
   margin: 0 20px;
 }
-

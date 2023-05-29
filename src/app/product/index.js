@@ -7,21 +7,22 @@ import useStore from '../../store/use-store';
 import BasketTool from '../../components/basket-tool';
 import ProductInfo from '../../components/product-info';
 import { useTranslate } from '../../hooks/use-translate';
+import NavBar from '../../components/nav-bar';
+import NavLinks from '../../components/nav-links';
 
 function Product() {
   const store = useStore();
   const { id } = useParams();
+  useEffect(() => {
+    store.actions.product.loadProduct(id);
+  }, [id]);
 
   const select = useSelector((state) => ({
-    product: state.catalog.product,
+    product: state.product.productDetail,
     amount: state.basket.amount,
     sum: state.basket.sum,
     lang: state.language.currentLanguage,
   }));
-
-  useEffect(() => {
-    store.actions.catalog.loadProduct(id);
-  }, [id]);
 
   const translate = useTranslate();
 
@@ -38,13 +39,16 @@ function Product() {
         toggleLanguage={callbacks.toggleLanguage}
         language={select.lang}
       />
-      <BasketTool
-        onOpen={callbacks.openModalBasket}
-        amount={select.amount}
-        sum={select.sum}
-        translate={translate}
-        lang={select.lang}
-      />
+      <NavBar>
+        <NavLinks path='/' title={translate?.main} />
+        <BasketTool
+          onOpen={callbacks.openModalBasket}
+          amount={select.amount}
+          sum={select.sum}
+          translate={translate}
+          lang={select.lang}
+        />
+      </NavBar>
 
       <ProductInfo
         product={select.product}

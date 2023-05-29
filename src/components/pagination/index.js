@@ -1,15 +1,13 @@
-import React from 'react';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
-import { usePagination, DOTS } from '../../hooks/use-pagination';
 import PropTypes from 'prop-types';
+import { pageGenerator, DOTS } from '../../utils';
+
 
 const Pagination = ({ totalCount, currentPage, limit, changePage }) => {
-
-
   const cn = bem('Pagination');
 
-  const paginationRange = usePagination({
+  const paginationRange = pageGenerator({
     currentPage,
     totalCount,
     limit,

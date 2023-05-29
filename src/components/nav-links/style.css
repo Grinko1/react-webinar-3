@@ -1,0 +1,9 @@
+.Nav{
+ padding: 20px;
+ display: flex;
+ align-items: center;
+ justify-content: start;
+}
+.Nav-link{
+      color: #0087E9;
+}

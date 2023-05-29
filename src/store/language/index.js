@@ -3,7 +3,7 @@ import StoreModule from '../module';
 class Language extends StoreModule {
   initState() {
     return {
-      currentLanguage: 'en',
+      currentLanguage: 'ru',
     };
   }
 
