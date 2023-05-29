@@ -63,7 +63,7 @@ function Main() {
         language={select.lang}
       />
       <NavBar>
-        <NavLinks path='/' title={translate?.main} />
+        <NavLinks title={translate?.main} />
 
         <BasketTool
           onOpen={callbacks.openModalBasket}

@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import './style.css';
 
 /* компонент для меню навигации */
-const NavLinks = ({ path, title }) => {
+const NavLinks = ({ title }) => {
   const cn = bem('Nav');
   return (
     <div className={cn()}>
-      <Link className={cn('link')} to={path}>
+      <Link className={cn('link')} to='/'>
         {title}
       </Link>
     </div>
