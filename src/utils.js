@@ -33,3 +33,29 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+
+/**
+ * Форматирование массива категорий
+ * @param arr {Array}
+ * @returns {Array}
+ */
+export const categoryTree = (arr) => {
+  let res = [];
+  const obj = Object.create(null);
+  if (arr.length) {
+    arr.forEach((el) => {
+      el.children = obj[el._id] && obj[el._id].children;
+      obj[el._id] = el;
+      if (el.parent === undefined) {
+        res.push(el);
+      } else {
+        obj[el.parent._id] = obj[el.parent._id] || {};
+        obj[el.parent._id].children = obj[el.parent._id].children || [];
+        obj[el.parent._id].children.push(el);
+      }
+    });
+  }
+
+  return res;
+};

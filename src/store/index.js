@@ -4,7 +4,6 @@ import * as modules from './exports.js';
  * Хранилище состояния приложения
  */
 class Store {
-
   constructor(initState = {}) {
     this.listeners = []; // Слушатели изменений состояния
     this.state = initState;
@@ -31,8 +30,8 @@ class Store {
     this.listeners.push(listener);
     // Возвращается функция для удаления добавленного слушателя
     return () => {
-      this.listeners = this.listeners.filter(item => item !== listener);
-    }
+      this.listeners = this.listeners.filter((item) => item !== listener);
+    };
   }
 
   /**
@@ -43,6 +42,8 @@ class Store {
    * modals: Object,
    * article: Object,
    * locale: Object
+   * user: Object
+   * category: Object
    * }}
    */
   getState() {

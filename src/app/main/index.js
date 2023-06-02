@@ -1,32 +1,38 @@
-import {memo} from 'react';
-import useStore from "../../hooks/use-store";
-import useTranslate from "../../hooks/use-translate";
-import useInit from "../../hooks/use-init";
-import Navigation from "../../containers/navigation";
-import PageLayout from "../../components/page-layout";
-import Head from "../../components/head";
-import CatalogFilter from "../../containers/catalog-filter";
-import CatalogList from "../../containers/catalog-list";
-import LocaleSelect from "../../containers/locale-select";
+import { memo, useEffect, useState } from 'react';
+import useStore from '../../hooks/use-store';
+import useTranslate from '../../hooks/use-translate';
+import useInit from '../../hooks/use-init';
+import Navigation from '../../containers/navigation';
+import PageLayout from '../../components/page-layout';
+import Head from '../../components/head';
+import CatalogFilter from '../../containers/catalog-filter';
+import CatalogList from '../../containers/catalog-list';
+import LocaleSelect from '../../containers/locale-select';
+import LoginMenu from '../../containers/login-menu';
 
 function Main() {
-
   const store = useStore();
 
-  useInit(() => {
-    store.actions.catalog.initParams();
-  }, [], true);
+  useInit(
+    () => {
+      store.actions.catalog.initParams();
+      store.actions.categories.loadCategories();
+    },
+    [],
+    true,
+  );
 
-  const {t} = useTranslate();
+  const { t } = useTranslate();
 
   return (
     <PageLayout>
+      <LoginMenu />
       <Head title={t('title')}>
-        <LocaleSelect/>
+        <LocaleSelect />
       </Head>
       <Navigation />
-      <CatalogFilter/>
-      <CatalogList/>
+      <CatalogFilter />
+      <CatalogList />
     </PageLayout>
   );
 }

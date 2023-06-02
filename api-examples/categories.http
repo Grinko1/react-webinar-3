@@ -2,3 +2,6 @@
 # Список категорий
 
 GET {{baseUrl}}/categories?fields=_id,title,parent(_id)&limit=*
+
+"6477698510d1060c910cbb59" parent
+"6477698510d1060c910cbb5a"
