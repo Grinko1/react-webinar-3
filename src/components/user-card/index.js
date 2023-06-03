@@ -1,6 +1,7 @@
 import React from 'react';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
+import PropTypes from 'prop-types';
 
 const UserCard = ({ user }) => {
   const cn = bem('UserCard');
@@ -25,6 +26,9 @@ const UserCard = ({ user }) => {
       )}
     </div>
   );
+};
+UserCard.propTypes = {
+  user: PropTypes.object,
 };
 
 export default UserCard;

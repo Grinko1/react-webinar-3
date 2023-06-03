@@ -17,7 +17,6 @@ function CatalogFilter() {
     category: state.catalog.params.category,
   }));
 
- 
   const callbacks = {
     // Сортировка
     onSort: useCallback((sort) => store.actions.catalog.setParams({ sort }), [store]),
@@ -34,23 +33,28 @@ function CatalogFilter() {
 
   const sortedCategory = categoryTree(select.categories);
 
+
   const getOptions = (arr) => {
     let options = [{ value: '', title: 'Все' }];
-    arr.map((item) => {
-      options.push({ value: item._id, title: item.title });
+
+     arr.forEach((item) => {
+       let count = 0;
+       getOptionRecursive(item, count);
+     });
+     
+    function getOptionRecursive (item, count) {
+      let prefix = '- '.repeat(count);
+      // console.log(count);
+      options.push({ value: item._id, title: prefix + item.title });
+        // console.log(item.children);
       if (item.children) {
-        item.children.map((child) => {
-          options.push({ value: child._id, title: '-- ' + child.title });
-          if (child.children) {
-            child.children.map((subchild) => {
-              options.push({ value: subchild._id, title: '--- ' + subchild.title });
-            });
-          }
-        });
+        item.children.forEach((child) => getOptionRecursive(child, count + 1));
       }
-    });
+    };
+   
     return options;
   };
+ 
 
   const options = {
     sort: useMemo(
@@ -74,11 +78,7 @@ function CatalogFilter() {
         value={select.category}
         onChange={callbacks.onCategorySelect}
       />
-      <Select 
-       options={options.sort} 
-       value={select.sort} 
-       onChange={callbacks.onSort} 
-       />
+      <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} />
       <Input
         value={select.query}
         onChange={callbacks.onSearch}

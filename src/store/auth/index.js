@@ -3,11 +3,10 @@ import StoreModule from '../module';
 /**
  * Авторизация пользователя
  */
-class UserState extends StoreModule {
+class AuthState extends StoreModule {
   initState() {
     return {
       isAuth: false,
-      userProfile: {},
       waiting: false,
       error: null,
     };
@@ -29,15 +28,14 @@ class UserState extends StoreModule {
       if (response.ok) {
         const { result } = await response.json();
         localStorage.setItem('token', result.token);
-        this.setState({
-          userProfile: {
-            name: result.user.profile.name,
-            phone: result.user.profile.phone,
-            email: result.user.email,
+
+        this.setState(
+          {
+            waiting: false,
+            isAuth: true,
           },
-          waiting: false,
-          isAuth: true,
-        });
+          'Пользователь залогинен',
+        );
       } else {
         const err = await response.json();
         throw new Error(err.error.data.issues[0].message);
@@ -64,15 +62,18 @@ class UserState extends StoreModule {
       });
       if (response.ok) {
         localStorage.removeItem('token');
-        this.setState({
-          userProfile: {},
-          waiting: false,
-          isAuth: false,
-        });
+        this.setState(
+          {
+            waiting: false,
+            isAuth: false,
+          },
+          'Пользователь вышел из аккаунта',
+        );
       }
     } catch (error) {
       this.setState({
         waiting: false,
+        error: error.message,
       });
     }
   }
@@ -89,24 +90,26 @@ class UserState extends StoreModule {
         },
       });
 
-      const { result } = await response.json();
-      this.setState({
-        userProfile: {
-          name: result.profile.name,
-          phone: result.profile.phone,
-          email: result.email,
-        },
-        waiting: false,
-        isAuth: true,
-      });
+      if (response.ok) {
+        this.setState(
+          {
+            waiting: false,
+            isAuth: true,
+          },
+          'Пользователь авторизирован',
+        );
+      } else {
+        const err = await response.json();
+        throw new Error(err.error.data.issues[0].message);
+      }
     } catch (error) {
       this.setState({
-        userProfile: {},
         waiting: false,
         isAuth: false,
+        error: error.message,
       });
     }
   }
 }
 
-export default UserState;
+export default AuthState;

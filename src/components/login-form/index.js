@@ -1,5 +1,6 @@
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
+import PropTypes from 'prop-types';
 
 const LoginForm = ({ values, setValues, handleLogin, error }) => {
   const cn = bem('LoginForm');
@@ -28,4 +29,16 @@ const LoginForm = ({ values, setValues, handleLogin, error }) => {
   );
 };
 
+LoginForm.propTypes = {
+  values: PropTypes.object,
+  handleLogin: PropTypes.func,
+  setValues: PropTypes.func,
+  error: PropTypes.string
+};
+
+LoginForm.defaultProps = {
+  handleLogin:  () => {},
+  setValues:  () => {},
+
+};
 export default LoginForm;

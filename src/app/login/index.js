@@ -18,7 +18,7 @@ function Login() {
   const fromPage = location.state?.from?.pathname || '/';
 
   const callbacks = {
-    login: useCallback((data) => store.actions.user.login(data), [store]),
+    login: useCallback((data) => store.actions.auth.login(data), [store]),
   };
 
   const [values, setValues] = useState({
@@ -27,9 +27,9 @@ function Login() {
   });
 
   const select = useSelector((state) => ({
-    waiting: state.user.waiting,
-    error: state.user.error,
-    isAuth: state.user.isAuth,
+    waiting: state.auth.waiting,
+    error: state.auth.error,
+    isAuth: state.auth.isAuth,
   }));
 
 

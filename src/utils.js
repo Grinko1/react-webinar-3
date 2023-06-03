@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 /**
  * Плюрализация
  * Возвращает вариант с учётом правил множественного числа под указанную локаль
@@ -34,7 +36,6 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
-
 /**
  * Форматирование массива категорий
  * @param arr {Array}
@@ -44,7 +45,7 @@ export const categoryTree = (arr) => {
   let res = [];
   const obj = Object.create(null);
   if (arr.length) {
-    arr.forEach((el) => {
+    arr.forEach((el, i) => {
       el.children = obj[el._id] && obj[el._id].children;
       obj[el._id] = el;
       if (el.parent === undefined) {
@@ -56,6 +57,5 @@ export const categoryTree = (arr) => {
       }
     });
   }
-
   return res;
 };

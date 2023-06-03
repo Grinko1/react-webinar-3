@@ -1,6 +1,7 @@
 import './style.css';
 import { cn as bem } from '@bem-react/classname';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const LoginTool = ({ handleRedirect, isAuth, link , name}) => {
 
@@ -27,4 +28,15 @@ const LoginTool = ({ handleRedirect, isAuth, link , name}) => {
   );
 };
 
+LoginTool.propTypes = {
+  isAuth: PropTypes.bool,
+  handleRedirect: PropTypes.func,
+  link: PropTypes.string,
+  name: PropTypes.string,
+};
+
+LoginTool.defaultProps = {
+  handleRedirect: () => {},
+
+};
 export default LoginTool;
