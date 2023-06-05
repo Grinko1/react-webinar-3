@@ -12,7 +12,7 @@ class ProfileState extends StoreModule {
     };
   }
 
-  async getCurrentUserInfo() {
+  async getUserInfo() {
     this.setState({
       waiting: true,
     });

@@ -10,6 +10,7 @@ class AuthState extends StoreModule {
       waiting: false,
       errorLogin: null,
       errorAuth: null,
+      profileInfo: {},
     };
   }
 
@@ -35,6 +36,9 @@ class AuthState extends StoreModule {
             waiting: false,
             isAuth: true,
             errorLogin: null,
+            profileInfo: {
+              name: result.user.profile.name,
+            },
           },
           'Пользователь залогинен',
         );
@@ -92,12 +96,16 @@ class AuthState extends StoreModule {
         },
       });
 
+      const { result } = await response.json();
       if (response.ok) {
         this.setState(
           {
             waiting: false,
             isAuth: true,
             errorAuth: null,
+            profileInfo: {
+              name: result.profile.name
+            }
           },
           'Пользователь авторизирован',
         );

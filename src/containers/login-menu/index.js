@@ -6,12 +6,7 @@ import useSelector from '../../hooks/use-selector';
 import useStore from '../../hooks/use-store';
 
 const LoginMenu = () => {
-  useInit(() => {
-    // получение информации о профиле
-    // (здесь тк в шапке нужно имя пользователя на всех страницах)
-    store.actions.profile.getCurrentUserInfo();
-  }, []);
-  
+
   const navigate = useNavigate();
   const store = useStore();
 
@@ -19,8 +14,9 @@ const LoginMenu = () => {
     waiting: state.auth.waiting,
     isAuth: state.auth.isAuth,
     error: state.auth.error,
-    name: state.profile?.profile?.name,
+    name: state.auth.profileInfo?.name,
   }));
+
 
   useEffect(() => {
     if (!select.isAuth) {

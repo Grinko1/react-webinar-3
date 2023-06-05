@@ -8,10 +8,15 @@ import Spinner from '../../components/spinner';
 import LocaleSelect from '../../containers/locale-select';
 import UserCard from '../../components/user-card';
 import LoginMenu from '../../containers/login-menu';
-
+import useInit from '../../hooks/use-init';
+import useStore from '../../hooks/use-store';
 
 function Profile() {
- 
+  const store = useStore();
+  useInit(() => {
+    store.actions.profile.getUserInfo();
+  }, []);
+
   const select = useSelector((state) => ({
     waiting: state.profile.waiting,
     profile: state.profile.profile,
