@@ -44,9 +44,7 @@ function CatalogFilter() {
      
     function getOptionRecursive (item, count) {
       let prefix = '- '.repeat(count);
-      // console.log(count);
       options.push({ value: item._id, title: prefix + item.title });
-        // console.log(item.children);
       if (item.children) {
         item.children.forEach((child) => getOptionRecursive(child, count + 1));
       }
