@@ -14,9 +14,11 @@ const RequireAuth = ({ children }) => {
 
   const select = useSelector((state) => ({
     isAuth: state.auth.isAuth,
+    waiting: state.auth.waiting,
+    errorAuth: state.auth.errorAuth,
   }));
 
-  if (localStorage.getItem('token') === null && !select.isAuth) {
+  if (!select.waiting && !select.isAuth && select.errorAuth !== null) {
     return <Navigate to='/login' state={{ from: location }} />;
   }
   return children;

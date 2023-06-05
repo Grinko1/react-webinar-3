@@ -6,14 +6,14 @@ import useSelector from '../../hooks/use-selector';
 import useStore from '../../hooks/use-store';
 
 const LoginMenu = () => {
-  const navigate = useNavigate();
-  const store = useStore();
-
   useInit(() => {
-    // получение информации о профиле 
+    // получение информации о профиле
     // (здесь тк в шапке нужно имя пользователя на всех страницах)
     store.actions.profile.getCurrentUserInfo();
   }, []);
+  
+  const navigate = useNavigate();
+  const store = useStore();
 
   const select = useSelector((state) => ({
     waiting: state.auth.waiting,

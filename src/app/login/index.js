@@ -28,18 +28,12 @@ function Login() {
 
   const select = useSelector((state) => ({
     waiting: state.auth.waiting,
-    error: state.auth.error,
+    error: state.auth.errorLogin,
     isAuth: state.auth.isAuth,
   }));
 
-
-  const [err, setErr] = useState(select.error);
-
   function handleLogin(e) {
     e.preventDefault();
-    if (!values.login.length || !values.password.length) {
-      setErr('Заполните все поля!');
-    }
     callbacks.login(values);
 
     setValues({

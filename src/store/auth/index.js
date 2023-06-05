@@ -8,7 +8,8 @@ class AuthState extends StoreModule {
     return {
       isAuth: false,
       waiting: false,
-      error: null,
+      errorLogin: null,
+      errorAuth: null,
     };
   }
 
@@ -33,6 +34,7 @@ class AuthState extends StoreModule {
           {
             waiting: false,
             isAuth: true,
+            errorLogin: null,
           },
           'Пользователь залогинен',
         );
@@ -42,7 +44,7 @@ class AuthState extends StoreModule {
       }
     } catch (error) {
       this.setState({
-        error: error.message,
+        errorLogin: error.message,
         waiting: false,
       });
     }
@@ -73,7 +75,7 @@ class AuthState extends StoreModule {
     } catch (error) {
       this.setState({
         waiting: false,
-        error: error.message,
+        errorLogin: error.message,
       });
     }
   }
@@ -95,6 +97,7 @@ class AuthState extends StoreModule {
           {
             waiting: false,
             isAuth: true,
+            errorAuth: null,
           },
           'Пользователь авторизирован',
         );
@@ -106,7 +109,7 @@ class AuthState extends StoreModule {
       this.setState({
         waiting: false,
         isAuth: false,
-        error: error.message,
+        errorAuth: error.message,
       });
     }
   }
