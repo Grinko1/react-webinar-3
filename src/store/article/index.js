@@ -1,3 +1,4 @@
+import simplifyErrors from "../../utils/simplify-errors";
 import StoreModule from "../module";
 
 /**
@@ -8,7 +9,8 @@ class ArticleState extends StoreModule {
   initState() {
     return {
       data: {},
-      waiting: false // признак ожидания загрузки
+      waiting: false, // признак ожидания загрузки
+      error: null
     }
   }
 
@@ -18,6 +20,7 @@ class ArticleState extends StoreModule {
    * @return {Promise<void>}
    */
   async load(id) {
+        console.log('load');
     // Сброс текущего товара и установка признака ожидания загрузки
     this.setState({
       data: {},
@@ -25,10 +28,13 @@ class ArticleState extends StoreModule {
     });
 
     try {
+  
       const res = await this.services.api.request({
-        url: `/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`
+        url: ''
+        `/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`
       });
 
+      console.log(res.data.result);
       // Товар загружен успешно
       this.setState({
         data: res.data.result,
@@ -40,7 +46,8 @@ class ArticleState extends StoreModule {
       // @todo В стейт можно положить информацию об ошибке
       this.setState({
         data: {},
-        waiting: false
+        waiting: false,
+        error: simplifyErrors(res.data.error.data.issues),
       });
     }
   }

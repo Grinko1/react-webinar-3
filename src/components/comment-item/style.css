@@ -1,0 +1,32 @@
+.Comment {
+  margin: 30px 0;
+}
+.Comment-info {
+  font-size: 12px;
+  font-weight: 700;
+}
+.Comment-info_author{
+  color: #666666;
+}
+.Comment-info_time {
+  font-weight: 400;
+  color: #666666;
+  margin-left: 10px;
+}
+.Comment-text {
+  padding: 10px 0;
+  font-size: 14px;
+}
+.Comment-btn button {
+  border: none;
+  background-color: transparent;
+  color: #0087E9;
+  padding: 0;
+  font-size: 12px;
+}
+.Comment-reply {
+  display: block;
+}
+.Comment-reply_hidden{
+  display: none;
+}
