@@ -5,7 +5,7 @@
   font-size: 12px;
   font-weight: 700;
 }
-.Comment-info_author{
+.Comment-info_author {
   color: #666666;
 }
 .Comment-info_time {
@@ -20,13 +20,13 @@
 .Comment-btn button {
   border: none;
   background-color: transparent;
-  color: #0087E9;
+  color: #0087e9;
   padding: 0;
   font-size: 12px;
 }
 .Comment-reply {
   display: block;
 }
-.Comment-reply_hidden{
+.Comment-reply_hidden {
   display: none;
 }

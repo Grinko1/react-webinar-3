@@ -8,6 +8,7 @@ import Spinner from '../../components/spinner';
 import useSelector from '../../hooks/use-selector';
 import { useParams } from 'react-router';
 import commentsAction from '../../store-redux/comments/actions';
+import CommentWrapper from '../../components/comment-wrapper';
 
 const Comments = () => {
   const selectRedux = useSelectorRedux(
@@ -70,7 +71,7 @@ const Comments = () => {
 
   return (
     <Spinner active={selectRedux.waiting}>
-      <CommentLayout head='Комментарии' qtt={comments?.length}>
+      <CommentWrapper head='Комментарии' qtt={comments?.length}>
         <CommentList
           comments={comments}
           isAuth={select.exists}
@@ -81,7 +82,7 @@ const Comments = () => {
           setActiveComment={setActiveComment}
           username={select.username}
         />
-      </CommentLayout>
+      </CommentWrapper>
     </Spinner>
   );
 };

@@ -10,16 +10,24 @@ const CommentItem = ({ comment, setActiveComment, activeComment, ...props }) => 
   const cn = bem('Comment');
   const isAuthor = props.username == comment.author;
 
+  const marginForAnswear = comment.level * 30 > 600 ? 600 : comment.level * 30;
+
   return (
-    <div className={cn()} style={{ marginLeft: `${comment.level * 30}px` }}>
-      <div className={cn('info',{author:isAuthor})}>
+    <div className={cn()} style={{ marginLeft: `${marginForAnswear}px` }}>
+      <div className={cn('info', { author: isAuthor })}>
         {comment.author}{' '}
         <span className={cn('info', { time: true })}>{dateFormat(comment.date)}</span>
       </div>
       <div className={cn('text')}>{comment.text}</div>
       <div className={cn('btn')}>
-        <button onClick={() =>setActiveComment({ id: comment._id })}>Ответить</button>
+        <button
+          onClick={() =>
+            setActiveComment({ id: comment._id})
+          }>
+          Ответить
+        </button>
       </div>
+
       {isReplying && (
         <CommentForm
           header='Новый ответ '
@@ -41,7 +49,7 @@ CommentItem.propTypes = {
     text: PropTypes.string,
     author: PropTypes.string,
     level: PropTypes.number,
-    date:PropTypes.string
+    date: PropTypes.string,
   }).isRequired,
   // comment: PropTypes.object,
   activeComment: PropTypes.object,
@@ -49,7 +57,7 @@ CommentItem.propTypes = {
 };
 
 CommentItem.defaultProps = {
-  activeComment:PropTypes.null,
+  activeComment: PropTypes.null,
   setActiveComment: () => {},
 };
 
