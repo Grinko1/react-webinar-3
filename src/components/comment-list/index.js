@@ -1,11 +1,11 @@
-import { memo, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 import CommentItem from '../comment-item';
 import CommentForm from '../comment-form';
 
-function CommentList({ comments , isAuth, ...props}) {
+function CommentList({ comments, isAuth, placeIdForForm, ...props }) {
 
   return (
     <>
@@ -18,6 +18,8 @@ function CommentList({ comments , isAuth, ...props}) {
             comment={item}
             isAuth={isAuth}
             username={props.username}
+            placeIdForForm={placeIdForForm}
+            formRef={props.formRef}
             {...props}
           />
         ))}

@@ -19,7 +19,8 @@ export default {
       dispatch({ type: 'comments/create-start' });
       try {
         const response = await services.api.request({
-          url: `/api/v1/comments?fields=*,author(profile(name))`,
+          // url:`/api/v1/comments?fields=items(_id,text,dateCreate,author(profile(name)),parent(_id,_type),isDeleted)`;
+          url: `/api/v1/comments?fields=_id,text,dateCreate,author(profile(name)),parent(_id,_type)`,
           method: 'POST',
           body: JSON.stringify(data),
         });

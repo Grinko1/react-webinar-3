@@ -14,8 +14,10 @@
   margin-left: 10px;
 }
 .Comment-text {
+  word-wrap: break-word;
   padding: 10px 0;
   font-size: 14px;
+  
 }
 .Comment-btn button {
   border: none;
@@ -23,6 +25,7 @@
   color: #0087e9;
   padding: 0;
   font-size: 12px;
+  cursor: pointer;
 }
 .Comment-reply {
   display: block;
@@ -30,3 +33,6 @@
 .Comment-reply_hidden {
   display: none;
 }
+/* .Comment-answear{
+  margin-left: 30px;
+} */

@@ -1,11 +1,12 @@
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
-const CommentForm = ({ header, isNew, isAuth, path, close, text, setText, handleAddComment }) => {
+const CommentForm = ({ header, isNew, isAuth, path, close, text, setText, handleAddComment,isDisabled, ...props }) => {
   const cn = bem('CommentForm');
+const location = useLocation();
 
   const closeForm = (e) => {
     e.preventDefault();
@@ -20,7 +21,9 @@ const CommentForm = ({ header, isNew, isAuth, path, close, text, setText, handle
           <form className={cn('form')}>
             <textarea value={text} onChange={(e) => setText(e.target.value)} />
             <div className={cn('buttons')}>
-              <button onClick={(e) => handleAddComment(e)}>Отправить</button>
+              <button disabled={isDisabled} onClick={(e) => handleAddComment(e)}>
+                Отправить
+              </button>
               {!isNew && <button onClick={closeForm}>Отмена</button>}
             </div>
           </form>
@@ -29,11 +32,17 @@ const CommentForm = ({ header, isNew, isAuth, path, close, text, setText, handle
         <>
           {isNew ? (
             <p className={cn('unauthorize')}>
-              <Link to={path}>Войдите</Link>, чтобы иметь возможность комментировать
+              <Link to={path} state={{ back: location }}>
+                Войдите
+              </Link>
+              , чтобы иметь возможность комментировать
             </p>
           ) : (
             <p className={cn('unauthorize')}>
-              <Link to={path}>Войдите</Link>, чтобы иметь возможность ответить.{' '}
+              <Link to={path} state={{ back: location }}>
+                Войдите
+              </Link>
+              , чтобы иметь возможность ответить.{' '}
               <span className={cn('cancel')} onClick={close}>
                 {' '}
                 Отмена

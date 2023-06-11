@@ -22,6 +22,17 @@
 .CommentForm-form button {
   width: 90px;
   margin: 10px 10px 0 0;
+  cursor: pointer;
+}
+.CommentForm-form button:disabled,
+.CommentForm-form button[disabled] {
+  background: #EFEFEF;
+  border: 1px solid #767676;
+  border-radius: 2px;
+  padding: 2px;
+  color: #000000;
+  cursor: not-allowed;
+
 }
 .CommentForm-cancel {
   color: #666666;
