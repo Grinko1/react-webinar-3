@@ -8,11 +8,12 @@ import useSelector from '../../hooks/use-selector';
 import { useParams } from 'react-router';
 import commentsAction from '../../store-redux/comments/actions';
 import CommentWrapper from '../../components/comment-wrapper';
+import useTranslate from '../../hooks/use-translate';
 
 const Comments = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  const { t } = useTranslate();
   const selectRedux = useSelectorRedux(
     (state) => ({
       comments: state.comments?.data,
@@ -103,7 +104,7 @@ const Comments = () => {
 
   return (
     <Spinner active={selectRedux.waiting}>
-      <CommentWrapper head='Комментарии' qtt={comments?.length}>
+      <CommentWrapper head={t('comments')} qtt={comments?.length}>
         <CommentList
           comments={comments}
           isAuth={select.exists}
@@ -118,6 +119,7 @@ const Comments = () => {
           placeIdForForm={placeIdForForm}
           formRef={formRef}
           scroll={scroll}
+          t={t}
         />
       </CommentWrapper>
     </Spinner>

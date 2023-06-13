@@ -9,7 +9,8 @@ class APIService {
     this.config = config
     this.defaultHeaders = {
       'Content-Type': 'application/json',
-    }
+      'Accept-Language': 'ru',
+    };
   }
 
   /**
@@ -17,7 +18,7 @@ class APIService {
    * @param url
    * @param method
    * @param headers
-   * @param options
+   * @param optionsx
    * @returns {Promise<{}>}
    */
   async request({url, method = 'GET', headers = {}, ...options}) {

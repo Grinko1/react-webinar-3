@@ -12,6 +12,7 @@ const CommentItem = ({
   isDisabled,
   placeIdForForm,
   formRef,
+  t,
   ...props
 }) => {
 
@@ -35,17 +36,18 @@ const CommentItem = ({
         </div>
         <div className={cn('text')}>{comment.text}</div>
         <div className={cn('btn')}>
-          <button onClick={handleReply}>Ответить</button>
+          <button onClick={handleReply}>{t('comments.reply')}</button>
         </div>
       </div>
       {isReplying && (
         <div style={{ marginLeft: `${marginForForm}px` }} ref={formRef}>
           <CommentForm
-            header='Новый ответ '
+            header={t('comments.newaswear')}
             isNew={false}
             isAuth={props.isAuth}
             path='/login'
             isDisabled={isDisabled}
+            t={t}
             {...props}
             close={() => {
               setActiveComment(null);

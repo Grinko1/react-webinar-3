@@ -14,11 +14,31 @@
     "other": "articles"
   },
   "article.add": "Add",
+  "article.countryOfOrigin": "Country of origin",
+  "article.category": "Category",
+  "article.year": "Production year",
+  "article.price": "Price",
   "filter.reset": "Reset",
   "auth.title": "Sign In",
   "auth.login": "Login",
   "auth.password": "Password",
   "auth.signIn": "Sign in",
   "session.signIn": "Sign In",
-  "session.signOut": "Sign Out"
+  "session.signOut": "Sign Out",
+  "comments": "Comments",
+  "comments.reply": "Reply",
+  "comments.newaswear": "New answear",
+  "comments.newcomment": "New comment",
+  "comments.send": "Send",
+  "comments.canсel": "Canсel",
+  "comments.login": "Sign in",
+  "comments.loginToComment": "to be able to answer",
+  "comments.loginToReply": "to be able to comment",
+  "category.sort.old":"Old",
+  "category.sort.name":"By name",
+  "category.sort.price":"Expensive",
+  "category.sort.order":"In order",
+  "category.sort.all":"All"
+
+
 }

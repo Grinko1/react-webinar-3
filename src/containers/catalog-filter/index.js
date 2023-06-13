@@ -11,7 +11,7 @@ import listToTree from "../../utils/list-to-tree";
 function CatalogFilter() {
 
   const store = useStore();
-
+const {t} = useTranslate()
   const select = useSelector(state => ({
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
@@ -31,21 +31,27 @@ function CatalogFilter() {
   };
 
   const options = {
-    sort: useMemo(() => ([
-      {value: 'order', title: 'По порядку'},
-      {value: 'title.ru', title: 'По именованию'},
-      {value: '-price', title: 'Сначала дорогие'},
-      {value: 'edition', title: 'Древние'},
-    ]), []),
-    categories: useMemo(() => ([
-      {value: '', title: 'Все'},
-      ...treeToList(listToTree(select.categories), (item, level) => (
-        {value: item._id, title: '- '.repeat(level) + item.title}
-      ))
-    ]), [select.categories]),
+    sort: useMemo(
+      () => [
+        { value: 'order', title: t('category.sort.order') },
+        { value: 'title.ru', title: t('category.sort.name') },
+        { value: '-price', title: t('category.sort.price') },
+        { value: 'edition', title: t('category.sort.old') },
+      ],
+      [t],
+    ),
+    categories: useMemo(
+      () => [
+        { value: '', title: t('category.sort.all') },
+        ...treeToList(listToTree(select.categories), (item, level) => ({
+          value: item._id,
+          title: '- '.repeat(level) + item.title,
+        })),
+      ],
+      [select.categories],
+    ),
   };
 
-  const {t} = useTranslate();
 
   return (
     <SideLayout padding='medium'>

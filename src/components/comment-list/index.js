@@ -5,7 +5,7 @@ import './style.css';
 import CommentItem from '../comment-item';
 import CommentForm from '../comment-form';
 
-function CommentList({ comments, isAuth, placeIdForForm, ...props }) {
+function CommentList({ comments, isAuth, placeIdForForm,t, ...props }) {
 
   return (
     <>
@@ -20,11 +20,12 @@ function CommentList({ comments, isAuth, placeIdForForm, ...props }) {
             username={props.username}
             placeIdForForm={placeIdForForm}
             formRef={props.formRef}
+            t={t}
             {...props}
           />
         ))}
       {props.activeComment === null && (
-        <CommentForm header='Новый комментарий' isNew={true} isAuth={isAuth} {...props} />
+        <CommentForm header={t('comments.newcomment')} isNew={true} t={t} isAuth={isAuth} {...props} />
       )}
     </>
   );

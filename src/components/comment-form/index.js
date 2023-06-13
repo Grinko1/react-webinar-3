@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 
 
-const CommentForm = ({ header, isNew, isAuth, path, close, text, setText, handleAddComment,isDisabled, ...props }) => {
+const CommentForm = ({ header, isNew, isAuth, path, close, text, setText, handleAddComment,isDisabled,t, ...props }) => {
   const cn = bem('CommentForm');
 const location = useLocation();
 
@@ -22,9 +22,9 @@ const location = useLocation();
             <textarea value={text} onChange={(e) => setText(e.target.value)} />
             <div className={cn('buttons')}>
               <button disabled={isDisabled} onClick={(e) => handleAddComment(e)}>
-                Отправить
+                {t('comments.send')}
               </button>
-              {!isNew && <button onClick={closeForm}>Отмена</button>}
+              {!isNew && <button onClick={closeForm}> {t('comments.canсel')}</button>}
             </div>
           </form>
         </>
@@ -33,19 +33,19 @@ const location = useLocation();
           {isNew ? (
             <p className={cn('unauthorize')}>
               <Link to={path} state={{ back: location }}>
-                Войдите
+                {t('comments.login')}
               </Link>
-              , чтобы иметь возможность комментировать
+              , {t('comments.loginToComment')}
             </p>
           ) : (
             <p className={cn('unauthorize')}>
               <Link to={path} state={{ back: location }}>
-                Войдите
+                {t('comments.login')}
               </Link>
-              , чтобы иметь возможность ответить.{' '}
+              , {t('comments.loginToReply')}.{' '}
               <span className={cn('cancel')} onClick={close}>
                 {' '}
-                Отмена
+                {t('comments.canсel')}
               </span>
             </p>
           )}
@@ -55,7 +55,7 @@ const location = useLocation();
   );
 };
 CommentForm.propTypes = {
-  header: PropTypes.oneOf(['Новый комментарий', 'Новый ответ ']),
+  header: PropTypes.string,
   isNew: PropTypes.bool,
   isAuth: PropTypes.bool,
   path: PropTypes.string,
